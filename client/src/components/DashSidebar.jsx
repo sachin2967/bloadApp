@@ -4,8 +4,11 @@ import {
   HiArrowSmRight,
   HiDocumentText,
   HiOutlineUserGroup,
+<<<<<<< HEAD
   HiAnnotation,
   HiChartPie,
+=======
+>>>>>>> 741367dfc230e27f63868e94abd5cab298460d97
 } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -44,6 +47,7 @@ export default function DashSidebar() {
     <Sidebar className="w-full md:w-56">
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-1">
+<<<<<<< HEAD
           {currentUser && currentUser.isAdmin && (
             <Link to="/dashboard?tab=dash">
               <Sidebar.Item
@@ -55,6 +59,8 @@ export default function DashSidebar() {
               </Sidebar.Item>
             </Link>
           )}
+=======
+>>>>>>> 741367dfc230e27f63868e94abd5cab298460d97
           <Link to="/dashboard?tab=profile">
             <Sidebar.Item
               active={tab === "profile"}
@@ -78,6 +84,7 @@ export default function DashSidebar() {
             </Link>
           )}
           {currentUser.isAdmin && (
+<<<<<<< HEAD
             <>
               <Link to="/dashboard?tab=users">
                 <Sidebar.Item
@@ -98,6 +105,17 @@ export default function DashSidebar() {
                 </Sidebar.Item>
               </Link>
             </>
+=======
+            <Link to="/dashboard?tab=users">
+              <Sidebar.Item
+                active={tab === "users"}
+                icon={HiOutlineUserGroup}
+                as="div"
+              >
+                Users
+              </Sidebar.Item>
+            </Link>
+>>>>>>> 741367dfc230e27f63868e94abd5cab298460d97
           )}
           <Sidebar.Item
             icon={HiArrowSmRight}

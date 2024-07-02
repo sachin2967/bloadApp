@@ -6,7 +6,11 @@ module.exports = {
   theme: {
     extend: {},
   },
+<<<<<<< HEAD
   plugins: [flowbite.plugin(),
      require("tailwind-scrollbar"),
    ]
+=======
+  plugins: [flowbite.plugin(), require("tailwind-scrollbar"),],
+>>>>>>> 741367dfc230e27f63868e94abd5cab298460d97
 };

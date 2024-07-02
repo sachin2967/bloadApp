@@ -9,6 +9,7 @@ body {
 
 .ql-editor {
   font-size: 1.05rem;
+<<<<<<< HEAD
 }
 
 
@@ -40,4 +41,6 @@ body {
 
 .dark .post-content a {
   color: red;
+=======
+>>>>>>> 741367dfc230e27f63868e94abd5cab298460d97
 }

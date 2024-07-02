@@ -5,8 +5,11 @@ import userRoutes from './routes/user.route.js';
 import signupRoutes from './routes/auth.route.js';
 import cookieParser from "cookie-parser";
 import postRoutes from './routes/post.route.js';
+<<<<<<< HEAD
 import commentRoutes from "./routes/comment.route.js";
 
+=======
+>>>>>>> 741367dfc230e27f63868e94abd5cab298460d97
 
 const app = express();
 const port = 3000;
@@ -29,7 +32,10 @@ mongoose.connect( process.env.MONGO).then(() => {console.log('Connected to Mongo
 app.use('/api/user', userRoutes);
 app.use('/api/auth', signupRoutes);
 app.use('/api/post', postRoutes);
+<<<<<<< HEAD
 app.use("/api/comment", commentRoutes);
+=======
+>>>>>>> 741367dfc230e27f63868e94abd5cab298460d97
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500 ;
