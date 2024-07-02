@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';
 import signupRoutes from './routes/auth.route.js';
 import cookieParser from "cookie-parser";
+import postRoutes from './routes/post.route.js';
 
 const app = express();
 const port = 3000;
@@ -25,6 +26,7 @@ mongoose.connect( process.env.MONGO).then(() => {console.log('Connected to Mongo
 // Define your routes here
 app.use('/api/user', userRoutes);
 app.use('/api/auth', signupRoutes);
+app.use('/api/post', postRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500 ;
