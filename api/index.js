@@ -6,20 +6,16 @@ import signupRoutes from './routes/auth.route.js';
 
 const app = express();
 const port = 3000;
-
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
 
 app.use(express.json());
 
 dotenv.config();
 
-mongoose.connect(
- process.env.MONGO
-).then(() => {
-  console.log('Connected to MongoDB');
-}).catch((err) => { 
-  console.log(err);
-});
+mongoose.connect( process.env.MONGO).then(() => {console.log('Connected to MongoDB');}).catch((err) => { console.log(err);});
 
 
 
@@ -28,8 +24,14 @@ mongoose.connect(
 app.use('/api/user', userRoutes);
 app.use('/api/auth', signupRoutes);
 
-// Add more routes here as needed
-
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500 ;
+  const message = err.message || 'Internal Server Error';
+  res.status(statusCode).json({
+    sucess: false,
+    statusCode,
+    message});
 });
+
+
+
