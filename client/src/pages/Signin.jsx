@@ -5,6 +5,7 @@ import { useNavigate,Link } from "react-router-dom";
 import { useDispatch } from "react-redux";  
 import { signInStart,signInSuccess,signInFailure } from "../redux/user/userSlice.js";
 import { useSelector } from "react-redux";
+import OAuth from "../components/OAuth.jsx";
 
 
 
@@ -80,7 +81,6 @@ function Signin() {
             </div>
             <div className="w-full flex-1 mt-8">
               <div className="mx-auto max-w-xs flex flex-col gap-4">
-              
                 <input
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="email"
@@ -129,6 +129,7 @@ function Signin() {
                     </div>
                   )}
                 </button>
+                <OAuth page="Sign in"/>
                 <p className="mt-6 text-xs text-gray-600 text-center">
                   New User?{" "}
                   <Link to="/signup">
