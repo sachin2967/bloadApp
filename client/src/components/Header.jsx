@@ -21,7 +21,7 @@ function Header() {
             alt="Flowbite Logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Flowbite
+            FlowBlog
           </span>
         </a>
         <div className="flex items-center md:order-2">
