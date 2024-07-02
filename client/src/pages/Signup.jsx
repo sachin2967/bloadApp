@@ -1,6 +1,49 @@
 import React from "react";
-
+import { useState } from "react";
+import { Alert,Spinner } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
 function Signup() {
+  const [formData, setFormData] = useState({});
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  };
+
+  const handleSubmit = async () => {
+    // console.log(formData);
+
+    if (!formData.username || !formData.email || !formData.password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(null);
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if(res.ok){
+        navigate('/signin')
+      }
+
+      const data = await res.json();
+
+      setLoading(false);
+
+
+      // console.log(data);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="h-[85vh] items-center  flex justify-center px-5 lg:px-0">
       <div className="max-w-screen-xl bg-white  sm:rounded-lg flex justify-center flex-1">
@@ -28,31 +71,56 @@ function Signup() {
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="text"
                   placeholder="Enter your name"
+                  onChange={handleChange}
+                  id="username"
                 />
                 <input
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="email"
                   placeholder="Enter your email"
+                  onChange={handleChange}
+                  id="email"
                 />
                 <input
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="password"
                   placeholder="Password"
+                  onChange={handleChange}
+                  id="password"
                 />
-                <button className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                  <svg
-                    className="w-6 h-6 -ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    strokeLinecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                    <circle cx="8.5" cy="7" r="4" />
-                    <path d="M20 8v6M23 11h-6" />
-                  </svg>
-                  <span className="ml-3">Sign Up</span>
+
+                <div>
+                  {error && (
+                    <Alert className="mt-4 py-2" color="failure">
+                      {error}
+                    </Alert>
+                  )}
+                </div>
+
+                <button
+                  className="mt-1 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                  onClick={handleSubmit}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <Spinner aria-label="Default status example" />
+                  ) : (
+                    <div className="flex">
+                      <svg
+                        className="w-6 h-6 -ml-2"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        strokeLinecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                        <circle cx="8.5" cy="7" r="4" />
+                        <path d="M20 8v6M23 11h-6" />
+                      </svg>
+                      <span className="ml-3">Sign Up</span>
+                    </div>
+                  )}
                 </button>
                 <p className="mt-6 text-xs text-gray-600 text-center">
                   Already have an account?{" "}

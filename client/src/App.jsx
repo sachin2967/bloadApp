@@ -7,6 +7,7 @@ import Signin from './pages/Signin'
 import Dashboard from './pages/Dashboard'
 import Signup from './pages/Signup'
 import Header from './components/Header'
+import './App.css'
 
 
 function App() {
