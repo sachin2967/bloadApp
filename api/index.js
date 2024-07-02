@@ -1,6 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import userRoutes from './routes/user.route.js';
+
+
+
 dotenv.config();
 
 mongoose.connect(
@@ -17,9 +21,7 @@ const app = express();
 const port = 3000;
 
 // Define your routes here
-app.get('/', (req, res) => {
-    res.send('Hello, World!');
-});
+app.use('/api/user', userRoutes);
 
 // Add more routes here as needed
 
