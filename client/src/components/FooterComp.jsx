@@ -16,7 +16,7 @@ function FooterComp() {
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div>
             <Footer.Brand
-              href="https://flowbite.com"
+              href="/"
               src="https://flowbite.com/docs/images/logo.svg"
               alt="Flowbite Logo"
               name="Flowbite"
