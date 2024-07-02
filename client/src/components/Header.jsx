@@ -11,6 +11,8 @@ function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const dispatch = useDispatch();
+   const location = useLocation();
+   const navigate = useNavigate();
 
   const toggleNav = () => setIsNavOpen(!isNavOpen);
   const toggleSearch = () => setIsSearchOpen(!isSearchOpen);
@@ -32,6 +34,25 @@ function Header() {
       console.log(error.message);
     }
   };
+
+   const [searchTerm, setSearchTerm] = useState("");
+
+   useEffect(() => {
+     const urlParams = new URLSearchParams(location.search);
+     const searchTermFromUrl = urlParams.get("searchTerm");
+     if (searchTermFromUrl) {
+       setSearchTerm(searchTermFromUrl);
+     }
+   }, [location.search]);
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const urlParams = new URLSearchParams(location.search);
+      urlParams.set("searchTerm", searchTerm);
+      const searchQuery = urlParams.toString();
+      navigate(`/search?${searchQuery}`);
+    };
+
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 border-b-2">
@@ -85,7 +106,7 @@ function Header() {
           </button>
 
           {/* Search Input (Desktop) */}
-          <div className="relative hidden md:block ">
+          <form className="relative hidden md:block " onSubmit={handleSubmit}>
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
                 className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -109,8 +130,10 @@ function Header() {
               id="search-navbar"
               className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </div>
+          </form>
 
           {/* Sign In Button */}
           {currentUser ? (

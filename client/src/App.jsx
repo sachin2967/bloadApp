@@ -10,23 +10,35 @@ import Header from './components/Header'
 import './App.css'
 import FooterComp from './components/FooterComp'
 import PrivateRoute from './components/PrivateRoute'
-
+import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute";
+import CreatePost from "./pages/CreatePost";
+import UpdatePost from "./pages/UpdatePost";
+import PostPage from "./pages/PostPage";
+import ScrollToTop from "./components/ScrollToTop";
+import Search from "./pages/Search";
 
 function App() {
   return (
     <BrowserRouter>
-          <Header/>
+      <ScrollToTop />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/post/:postSlug" element={<PostPage />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route element={<PrivateRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route element={<OnlyAdminPrivateRoute />}>
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/update-post/:postId" element={<UpdatePost />} />
         </Route>
       </Routes>
-      <FooterComp/>
+      <FooterComp />
     </BrowserRouter>
   );
 }
