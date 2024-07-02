@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-// import { toggleTheme } from "../redux/theme/themeSlice";
+import { toggleTheme } from "../redux/theme/themeSlice";
 // import { signoutSuccess } from "../redux/user/userSlice";
 import { useEffect, useState } from "react";
 
@@ -15,6 +15,7 @@ function Header() {
   const toggleNav = () => setIsNavOpen(!isNavOpen);
   const toggleSearch = () => setIsSearchOpen(!isSearchOpen);
   const { currentUser } = useSelector((state) => state.user);
+  const { theme } = useSelector((state) => state.theme);
 
   const handleSignout = async () => {
     try {
@@ -53,15 +54,9 @@ function Header() {
           <button
             type="button"
             className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center justify-center me-2"
+            onClick={() => dispatch(toggleTheme())}
           >
-            <svg
-              className="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-            </svg>
+            {theme === "light" ? <FaSun /> : <FaMoon />}
             <span className="sr-only">Toggle dark mode</span>
           </button>
 
@@ -69,7 +64,7 @@ function Header() {
           <button
             onClick={toggleSearch}
             type="button"
-            className="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1"
+            className="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1 "
           >
             <svg
               className="w-5 h-5"
@@ -120,26 +115,25 @@ function Header() {
           {/* Sign In Button */}
           {currentUser ? (
             <div className="m-2">
-            <Dropdown
-              arrowIcon={false}
-              inline
-              label={
-                <Avatar alt="user" img={currentUser.profilePicture} rounded />
-              }
-              
-            >
-              <Dropdown.Header>
-                <span className="block text-sm">@{currentUser.username}</span>
-                <span className="block text-sm font-medium truncate">
-                  {currentUser.email}
-                </span>
-              </Dropdown.Header>
-              <Link to={"/dashboard?tab=profile"}>
-                <Dropdown.Item>Profile</Dropdown.Item>
-              </Link>
-              <Dropdown.Divider />
-              <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
-            </Dropdown>
+              <Dropdown
+                arrowIcon={false}
+                inline
+                label={
+                  <Avatar alt="user" img={currentUser.profilePicture} rounded />
+                }
+              >
+                <Dropdown.Header>
+                  <span className="block text-sm">@{currentUser.username}</span>
+                  <span className="block text-sm font-medium truncate">
+                    {currentUser.email}
+                  </span>
+                </Dropdown.Header>
+                <Link to={"/dashboard?tab=profile"}>
+                  <Dropdown.Item>Profile</Dropdown.Item>
+                </Link>
+                <Dropdown.Divider />
+                <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
+              </Dropdown>
             </div>
           ) : (
             <Link
