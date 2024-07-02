@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Alert,Spinner } from "flowbite-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 function Signup() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
@@ -124,9 +124,9 @@ function Signup() {
                 </button>
                 <p className="mt-6 text-xs text-gray-600 text-center">
                   Already have an account?{" "}
-                  <a href="">
+                  <Link to="/signin">
                     <span className="text-blue-900 font-semibold">Sign in</span>
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
