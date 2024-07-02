@@ -46,7 +46,6 @@ export default function DashUsers() {
     }
   };
 
-<<<<<<< HEAD
    const handleDeleteUser = async () => {
      try {
        const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
@@ -63,9 +62,6 @@ export default function DashUsers() {
        console.log(error.message);
      }
    };
-=======
-  const handleDeleteUser = async () => {};
->>>>>>> 741367dfc230e27f63868e94abd5cab298460d97
 
   return (
     <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
